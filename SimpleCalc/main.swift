@@ -43,27 +43,27 @@ func fact(input: [String]) -> Int {
     return result
 }
 
-var keepCalculating = true
-print("Welcome to SimpleCalc! Enter a number, followed by the enter key to perform a + - / * or % operation \n" + "\n")
+print("Welcome to SimpleCalc! Enter a number, followed by the enter key to perform a + - / * or % operation." + "\n \nYou can also perform an average calcuation on a series of numbers using \"avg\" (ex: \"5 4 3 2 avg\" = 3.5), a count using \"count\" (ex: \"1 2 3 4 count\" = 4), or a factorial function using \"fact\" (ex: \"5 fact\" = 120).\n")
 
+var keepCalculating = true
 while keepCalculating {
 
     let input1 = input()
     var textArray = input1.characters.split{$0 == " "}.map(String.init)
     let lastIndex: String = textArray[textArray.count-1].lowercaseString
 
-    if lastIndex.rangeOfString("count") != nil || lastIndex.rangeOfString("fact") != nil || lastIndex.rangeOfString("avg") != nil {
+    if lastIndex.rangeOfString("count") != nil || lastIndex.rangeOfString("fact") != nil || lastIndex.rangeOfString("avg") != nil { 
         
         textArray.removeAtIndex(textArray.count-1)
         if input1.lowercaseString.rangeOfString("count") != nil {
-            print("There are \(count(textArray)) numbers in that string")
+            print("There are \(count(textArray)) numbers total.")
         } else if input1.lowercaseString.rangeOfString("avg") != nil {
             print("The average is: \(avg(textArray))")
         } else if input1.lowercaseString.rangeOfString("fact") != nil {
             if textArray.count == 1 {
-                print("The factorial of \(textArray[0]) is: \(fact(textArray))")
+                print("The factorial of \(textArray[0]) = \(fact(textArray))")
             } else {
-                print("A factorial operation can only take in one number at a time. Pleas try again.")
+                print("A factorial operation can only take in one number at a time. Please try again.")
             }
         }
         
@@ -71,7 +71,16 @@ while keepCalculating {
         let num1 = convert(input1)
         
         print("Enter an operation")
-        let operation = input()
+        var operation = input()
+        var validOperation = true
+        while validOperation {
+           if operation.rangeOfString("+") == nil && operation.rangeOfString("-") == nil && operation.rangeOfString("/") == nil && operation.rangeOfString("*") == nil && operation.rangeOfString("%") == nil {
+                print("Please enter a valid operation (+ - / * %).")
+                operation = input()
+           } else {
+            validOperation = false
+            }
+        }
         
         print("Enter a number")
         let num2 = convert(input())
@@ -101,8 +110,8 @@ while keepCalculating {
 
     }
 
-    print("\n" + "Would you like to perform another calculation? Pleas enter \"yes\" or \"no\"")
-    if input().lowercaseString.rangeOfString("no") != nil {
+    print("\n\n" + "Would you like to perform another calculation? Please enter \"y\" or \"n\".")
+    if input().lowercaseString.rangeOfString("n") != nil {
         keepCalculating = false
     }
 
@@ -110,16 +119,4 @@ while keepCalculating {
 
 }
 
-
-
-
-
-
-/* println("")
-print("Would you like to do another calculation?")
-let ans
-
-if string.lowercaseString.rangeOfString("swift") != nil {
-    println("exists")
-}
-*/
+print("\nOkay, have a good day.\nP.S. The cake is a lie.\n")
