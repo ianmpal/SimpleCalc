@@ -15,8 +15,8 @@ func input() -> String {
     return result.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet())
 }
 
-func convert(incoming:String) -> Int {
-    return NSNumberFormatter().numberFromString(incoming)!.integerValue
+func convert(incoming:String) -> Double {
+    return NSNumberFormatter().numberFromString(incoming)!.doubleValue
 }
 
 func count(input: [String]) -> Int {
@@ -33,9 +33,9 @@ func avg(input: [String]) -> Double {
     return total / count
 }
 
-func fact(input: [String]) -> Int {
+func fact(input: [String]) -> Double {
     var inputNum = convert(input[0])
-    var result = 1
+    var result = 1.0
     while (inputNum > 0) {
         result = result * inputNum
         inputNum--
@@ -52,7 +52,7 @@ while keepCalculating {
     var textArray = input1.characters.split{$0 == " "}.map(String.init)
     let lastIndex: String = textArray[textArray.count-1].lowercaseString
 
-    if lastIndex.rangeOfString("count") != nil || lastIndex.rangeOfString("fact") != nil || lastIndex.rangeOfString("avg") != nil { 
+    if lastIndex.rangeOfString("count") != nil || lastIndex.rangeOfString("fact") != nil || lastIndex.rangeOfString("avg") != nil {
         
         textArray.removeAtIndex(textArray.count-1)
         if input1.lowercaseString.rangeOfString("count") != nil {
@@ -85,7 +85,7 @@ while keepCalculating {
         print("Enter a number")
         let num2 = convert(input())
         
-        var result = 0
+        var result = 0.0
         var resultDouble: Double = 0
         
         if operation == "+" {
@@ -100,8 +100,6 @@ while keepCalculating {
             result = num1%num2
         }
         
-        //print(resultDouble)
-        
         if operation == "/" {
             print("The result of \(num1) \(operation) \(num2) =  \(resultDouble)")
         } else {
@@ -114,8 +112,6 @@ while keepCalculating {
     if input().lowercaseString.rangeOfString("n") != nil {
         keepCalculating = false
     }
-
-    ///END CODE
 
 }
 
